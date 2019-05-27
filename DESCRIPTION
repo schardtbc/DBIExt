@@ -1,11 +1,14 @@
 Package: DBIExt
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Extentsion for DBI new Generics
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Bruce Curtis Schardt
+Maintainer: Bruce Curtis Schardt <schardt.bruce.curtis@gmail.com>
+Description: A DBI Extention Package toExplore useful new generics. Speciffically to introduce dbUpdateTable. 
+    dbUpdateTable implements a generally applicable method to update selected columns of a database table by 
+    values in a data-frame. The data-frame is written to a temporary table in the database and the update is performed using
+    an UPDATE tbale, inner join. This join method generally very fast. Using R to prepare the date for updating into the table
+    is also very paowerful. 
+License: MIT
 Encoding: UTF-8
 LazyData: true

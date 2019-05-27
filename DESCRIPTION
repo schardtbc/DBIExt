@@ -1,16 +1,22 @@
 Package: DBIExt
 Type: Package
-Title: Extentsion for DBI new Generics
+Title: Extentsion for DBI; new Generics
 Version: 0.1.0
 Author: Bruce Curtis Schardt
 Maintainer: Bruce Curtis Schardt <schardt.bruce.curtis@gmail.com>
 Description: A DBI Extention Package toExplore useful new generics. Speciffically to introduce dbUpdateTable. 
     dbUpdateTable implements a generally applicable method to update selected columns of a database table by 
     values in a data-frame. The data-frame is written to a temporary table in the database and the update is performed using
-    an UPDATE tbale, inner join. This join method generally very fast. Using R to prepare the date for updating into the table
+    an UPDATE table, inner join. This join method generally very fast. Using R to prepare the date for updating into the table
     is also very paowerful. 
 License: MIT
-Encoding: UTF-8
+URL: http://github.com/schardtbc/DBIExt
+BugReports: http://github.com/schardtbc/DBIExt/issues
+Depends: 
+    R (>= 3.2.0)
+Imports: 
+    DBI (>= 1.0),
+    dplyr
 LazyData: true
 RoxygenNote: 6.1.1
 Collate: 
@@ -19,3 +25,5 @@ Collate:
     'sql-generation.R'
     'table-replace.R'
     'table-update.R'
+VignetteBuilder: knitr
+Encoding: UTF-8

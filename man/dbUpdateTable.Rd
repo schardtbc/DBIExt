@@ -15,18 +15,33 @@ of a call to dbQuoteIdentifier().}
 
 \item{data.update}{a data.frame (or coercible to data.frame).}
 
-\item{set}{a named character vector of varibles}
+\item{set}{a named character vector of varibles
 
-\item{by}{a character vector of variables to join. If NULL, the default, *_join() will
-          do a natural join, using all variables with common names across the two tables.
+      If NULL, the default, then the function expects the
+         data.update to be a grouped data.frame. The UPDATE statement will be constructed to match
+         the ungrouped columns in the `data.update` dataset with identically names columns in the
+         target database table.
+
+      If not NULL, then a character vector provides the names of the columns to join the database table to the
+      dataframe. example by = c("symbol", "date"). Use a named vector by = c("col1" = "col2") to match columns
+      with different names in the database target table and the supplied data.update dataset.}
+
+\item{by}{a character vector of variables to join.
+
+      If NULL, the default, then the function expects the
+         data.update to be a grouped data.frame. The grouped columns will be matched with identically named columns
+         the database table to construct the inner join clause the the update statement.
          A message lists the variables so that you can check they're right (to suppress
          the message, simply explicitly list the variables that you want to join).
 
-To join by different variables on x and y use a named vector. For example, by = c("a" = "b") will match x.a to y.b.}
+      If not NULL, then a character vector provides the names of the columns to join the database table to the
+      dataframe. example by = c("symbol", "date"). Use a named vector by = c("col1" = "col2") to match columns
+      with different names in the database target table and the supplied data.update dataset.}
 }
 \description{
-records in the target table in the database will be updated by the data provided in
-the `data.update` data-frame. The default method provided, creates and populates a
+a call to `dbUpdateTable()` executes the sql to update records for a target database using the data
+in the `data.update` data-frame. The default method provided, 4 SQL statements are generated to
+perform the update: a call to `dbCreateTable()`; a call to `dbAlterTabledatecreates and populates a
 temporary table using the data provided the `data.update` dataframe
 }
 \details{

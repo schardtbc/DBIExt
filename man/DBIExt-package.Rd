@@ -9,6 +9,14 @@
 A DBI Extention Package toExplore useful new generics. Speciffically to introduce dbUpdateTable. 
     dbUpdateTable implements a generally applicable method to update selected columns of a database table by 
     values in a data-frame. The data-frame is written to a temporary table in the database and the update is performed using
-    an UPDATE tbale, inner join. This join method generally very fast. Using R to prepare the date for updating into the table
+    an UPDATE table, inner join. This join method generally very fast. Using R to prepare the date for updating into the table
     is also very paowerful.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{http://github.com/schardtbc/DBIExt}
+  \item Report bugs at \url{http://github.com/schardtbc/DBIExt/issues}
+}
+
 }

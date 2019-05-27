@@ -10,8 +10,8 @@
 #' The `row.names` argument must be passed explicitly in order to avoid
 #' a compatibility warning.  The default will be changed in a later release.
 #'
-#' @inheritParams sqlCreateTable
-#' @inheritParams rownames
+#' @inheritParams DBI::sqlCreateTable
+#' @inheritParams DBI::rownames
 #' @param values A data frame. Factors will be converted to character vectors.
 #'   Character vectors will be escaped with [dbQuoteString()].
 #' @family SQL generation
@@ -53,8 +53,8 @@ setMethod("sqlReplaceInTable", signature("DBIConnection"),
 )
 
 #' @rdname sqlReplaceInTable
-#' @inheritParams sqlCreateTable
-#' @inheritParams rownames
+#' @inheritParams DBI::sqlCreateTable
+#' @inheritParams DBI::rownames
 #' @param prefix Parameter prefix to use for placeholders.
 #' @param pattern Parameter pattern to use for placeholders:
 #' - `""`: no pattern
@@ -118,7 +118,7 @@ sqlReplaceInTableTemplate <- function(con, table, values, row.names = NA, prefix
 #'   with those in the target table in the database.
 #' @param row.names Must be `NULL`.
 #' @inheritParams sqlReplaceInTableTemplate
-#' @inheritParams dbDisconnect
+#' @inheritParams DBI::dbDisconnect
 #' @family DBIConnection generics
 #' @export
 #' @examples

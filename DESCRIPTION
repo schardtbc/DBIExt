@@ -12,3 +12,10 @@ Description: A DBI Extention Package toExplore useful new generics. Specifficall
 License: MIT
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Collate: 
+    'DBIExt.R'
+    'hidden.R'
+    'sql-generation.R'
+    'table-replace.R'
+    'table-update.R'

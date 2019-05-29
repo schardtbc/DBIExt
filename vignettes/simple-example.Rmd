@@ -12,8 +12,7 @@ vignette: >
 ```{r setupSE, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  cache = TRUE
+  comment = "#>"
   )
 ```
 
@@ -76,5 +75,7 @@ res <- dbUpdateTable(db,"T123",update.df);
 print(glue::glue("number of records modified in DBMS {res}"))
 
 updated <- dbReadTable(db,"T123");
+closeDBConnection(db);
+
 updated
 ```

@@ -1,6 +1,13 @@
 An Extentsion Package for DBI. Implementation of new generic function
 dbUpdateTable
 
+Installation
+------------
+
+``` r
+devtools::install_github("schardtbc/DBIExt")
+```
+
 Introduction
 ------------
 
@@ -54,8 +61,8 @@ T2 <- tibble::as_tibble(list(C1=1:26,C2=LETTERS,CX=0,CY=1))
 sqlUpdateTable(con, "T1", T2, set = c("CX","CY"), by = c("C1","C2"))
 ```
 
-Why no `where`WHERE\` caluse?
------------------------------
+Why no `WHERE` caluse?
+----------------------
 
 Update queries can use a `WHERE` clause to limit the scope of the
 update. However in an Update-join the scope of the query is alreadly
@@ -173,6 +180,8 @@ print(glue::glue("number of records modified in DBMS {res}"))
 #> number of records modified in DBMS 26
 
 updated <- dbReadTable(db,"T123");
+closeDBConnection(db);
+
 updated
 #>    id  cn cc
 #> 1   1 100  A

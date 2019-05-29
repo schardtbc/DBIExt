@@ -16,6 +16,12 @@ knitr::opts_chunk$set(
 
 An Extentsion Package for DBI. Implementation of new generic function dbUpdateTable
 
+## Installation
+
+```{r echo=TRUE, eval = FALSE}
+devtools::install_github("schardtbc/DBIExt")
+```
+
 ## Introduction
 
 ```{r child='vignettes/update-table.Rmd'}

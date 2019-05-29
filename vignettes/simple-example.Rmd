@@ -1,0 +1,80 @@
+---
+title: "simple table update example"
+author: "Bruce Curtis Schardt"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{simple table update example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setupSE, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  cache = TRUE
+  )
+```
+
+### Connection to local test database
+```{r}
+library(DBI)
+library(DBIExt)
+
+config <- list(
+    HOST = "localhost",
+    DATABASE = "mktdata000",
+    USER = "test",
+    PASSWORD = "test");
+
+#' get the main database connection
+getDBConnection <- function(){
+  connection <- DBI::dbConnect(RMariaDB::MariaDB(), host = config[["HOST"]],
+                               user = config[["USER"]], password = config[["PASSWORD"]], dbname = config[["DATABASE"]])
+}
+
+#' close the database connection
+closeDBConnection <- function(connection) {
+  DBI::dbDisconnect(connection)
+}
+
+db <- getDBConnection();
+db
+```
+
+### Setup a DBMS table
+
+```{r}
+
+cid <- 1:26;
+cn  <- 100:125;
+clc  <- letters[cid];
+
+
+target.df <- tibble::as_tibble(list(id = cid, cn = cn, cc = clc));
+DBI::dbWriteTable(db,"T123",target.df,overwrite = TRUE);
+
+original <- dbReadTable(db, "T123")
+original
+```
+
+### Setup a data.frame for the update data
+
+```{r}
+cuc  <- LETTERS[cid];
+update.df <- tibble::as_tibble(list(id = cid, cc = cuc));
+update.df <- dplyr::group_by(update.df,id)
+
+update.df
+```
+
+### Perform the Update In The DBMS
+
+```{r}
+res <- dbUpdateTable(db,"T123",update.df);
+print(glue::glue("number of records modified in DBMS {res}"))
+
+updated <- dbReadTable(db,"T123");
+updated
+```

@@ -1,0 +1,27 @@
+---
+title: "DBI Update Table"
+author: "Bruce C. Schardt"
+date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+An Extentsion Package for DBI. Implementation of new generic function dbUpdateTable
+
+## Introduction
+
+```{r child='vignettes/update-table.Rmd'}
+```
+
+## A (very) Simple Example
+
+```{r child='vignettes/simple-example.Rmd'}
+```

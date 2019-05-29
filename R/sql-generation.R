@@ -24,15 +24,15 @@
 #' @examples
 #'
 setGeneric("sqlOnClause",
-           def = function(con, table1, table2, by,...) standardGeneric("sqlOnClause")
+           def = function(con, x, y, by,...) standardGeneric("sqlOnClause")
 )
 
 #' @rdname hidden_aliases
 #' @export
 setMethod("sqlOnClause", signature("DBIConnection"),
-          function(con, table1, table2, by) {
-            t1 <- DBI::dbQuoteIdentifier(con, tabel1)
-            t2 <- DBI::dbQuoteIdentifier(con, tabel2)
+          function(con, x, y, by) {
+            t1 <- DBI::dbQuoteIdentifier(con, x)
+            t2 <- DBI::dbQuoteIdentifier(con, y)
             t1 = paste0(t1, ".")
             t2 = paste0(t2, ".")
             target <- names(by)
@@ -151,15 +151,15 @@ setMethod("sqlSetClause", signature("DBIConnection"),
 #' @examples
 #'
 setGeneric("sqlUpdateTable",
-           def = function(con, x,y, set,...) standardGeneric("sqlUpdateTable")
+           def = function(con, x,y, set, by,...) standardGeneric("sqlUpdateTable")
 )
-#' generate SET caluses for an UPDATE statement
+#' generate UPDATE statement
 #' @rdname hidden_aliases
 #' @export
 setMethod("sqlUpdateTable", signature("DBIConnection"),
-          function(con, table1, table2, set = NULL, by = NULL) {
-            qtable1 <- DBI::dbQuoteIdentifier(con, table1)
-            qtable2 <- DBI::dbQuoteIdentifier(con, table2)
+          function(con, x, y, set = NULL, by = NULL) {
+            qtable1 <- DBI::dbQuoteIdentifier(con, x)
+            qtable2 <- DBI::dbQuoteIdentifier(con, y)
 
             DBI::SQL(
               paste0(
@@ -168,9 +168,9 @@ setMethod("sqlUpdateTable", signature("DBIConnection"),
                 "\nINNER JOIN ",
                 qtable2,
                 "\n",
-                sqlOnClause(con, by, qtable1, qtable2),
+                sqlOnClause(con, qtable1, qtable2, by),
                 "\n",
-                sqlSetClause(con, set, qtable1, qtable2)
+                sqlSetClause(con, qtable1, qtable2, set)
               )
             )
           })
@@ -201,7 +201,6 @@ setMethod("sqlAlterTableWithPrimaryKey", signature("DBIConnection"),
 
             pk.q <-
               sapply(pk, function(x) {
-                print(x)
                 DBI::dbQuoteIdentifier(conn, as.character(x))
               })
 

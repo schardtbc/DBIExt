@@ -4,7 +4,8 @@
 \alias{dbUpdateTable}
 \title{update records in a database table}
 \usage{
-dbUpdateTable(con, target.table, data.update, set, by, ...)
+dbUpdateTable(con, target.table, data.update, set = NULL, by = NULL,
+  ...)
 }
 \arguments{
 \item{con}{an S4 object that inherits from DBIConnection. This object is used to communicate

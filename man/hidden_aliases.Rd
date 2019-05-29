@@ -13,11 +13,11 @@
 \alias{dbUpdateTable,DBIConnection-method}
 \title{Internal page for hidden aliases}
 \usage{
-\S4method{sqlOnClause}{DBIConnection}(con, table1, table2, by)
+\S4method{sqlOnClause}{DBIConnection}(con, x, y, by)
 
 \S4method{sqlSetClause}{DBIConnection}(con, x, y, set)
 
-\S4method{sqlUpdateTable}{DBIConnection}(con, table1, table2, set = NULL,
+\S4method{sqlUpdateTable}{DBIConnection}(con, x, y, set = NULL,
   by = NULL)
 
 \S4method{sqlAlterTableWithPrimaryKey}{DBIConnection}(conn, target.table,

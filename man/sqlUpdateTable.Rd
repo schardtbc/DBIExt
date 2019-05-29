@@ -4,7 +4,7 @@
 \alias{sqlUpdateTable}
 \title{Compose an on clause for a table join}
 \usage{
-sqlUpdateTable(con, x, y, set, ...)
+sqlUpdateTable(con, x, y, set, by, ...)
 }
 \arguments{
 \item{x, y}{names of tbls to join. These will be quoted with dbQuoteIdentifier}

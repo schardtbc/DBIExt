@@ -41,7 +41,7 @@
 #' @examples
 #'
 setGeneric("dbUpdateTable",
-           def = function(con, target.table, data.update, set, by, ...) standardGeneric("dbUpdateTable")
+           def = function(con, target.table, data.update, set = NULL, by = NULL, ...) standardGeneric("dbUpdateTable")
 )
 
 #' @rdname hidden_aliases
@@ -84,11 +84,11 @@ function(con, target.table, data.update, set = NULL, by = NULL) {
     stop("unable to create tempory table for the update data.frame");
   }
   # add a primary key to table, this will speed up the update for most common use case
-  alter_table <- sqlAlterTableWithPrimaryKey(con,tmp.table, pk = t1.by );
+  alter_table <- sqlAlterTableWithPrimaryKey(con,tmp.table, pk = update.by );
   DBI::dbExecute(con,alter_table);
   # insert the update data into the temporary table
   DBI::dbAppendTable(con,tmp.table,data.update);
-  update_statement <- sqlUpdateInTable(con,target.table, tmp.table, set = set, by = by);
+  update_statement <- sqlUpdateTable(con,target.table, tmp.table, set = set, by = by);
   tryCatch(DBI::dbExecute(con,update_statement),
            error = function(c) stop(c),
            finally = function(c) {

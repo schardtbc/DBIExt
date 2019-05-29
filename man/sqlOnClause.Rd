@@ -4,16 +4,16 @@
 \alias{sqlOnClause}
 \title{Compose an on clause for a table join}
 \usage{
-sqlOnClause(con, table1, table2, by, ...)
+sqlOnClause(con, x, y, by, ...)
 }
 \arguments{
+\item{x, y}{names of tbls to join. These will be quoted with dbQuoteIdentifier}
+
 \item{by}{a character vector of columns to join by.  If `NULL`, the
 default, `*_join()` will do a natural join, using all variables with
 common names across the two tables. A message lists the variables so
 that you can check they're right (to suppress the message, simply
 explicitly list the variables that you want to join).}
-
-\item{x, y}{names of tbls to join. These will be quoted with dbQuoteIdentifier}
 }
 \description{
 `sqlOnClause()` generates a single SQL string that forms the on clause

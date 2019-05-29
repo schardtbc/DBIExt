@@ -27,3 +27,7 @@ Collate:
     'table-update.R'
 VignetteBuilder: knitr
 Encoding: UTF-8
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat

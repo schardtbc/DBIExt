@@ -15,9 +15,9 @@ This DBI Extention package introduces a new S4 generic `dbUpdateTable`.
 Updating tables is not the focus of the DBI package as pure analysis
 scripts treat database tables as read-only.
 
-In other domains database maintainence updating information in rows of
-an existing table is a requirement. Droping the table and recreating it
-as is done by dbWriteTable with overwrite argument set to true is not an
+In other domains, database maintainence requires updating information in
+rows of an existing table. Dropping the table and recreating it as is
+done by dbWriteTable with overwrite argument set to true is not an
 optimal solution for many applications.
 
 No single generic update function could cover the diverse variety
@@ -33,17 +33,16 @@ SET T1.CX = T2.CX,
     T1.CY = T2.CY;
 ```
 
-reference: \[tutorial on UPDATE join syntax for MySQL\]
-(<a href="http://www.mysqltutorial.org/mysql-update-join/" class="uri">http://www.mysqltutorial.org/mysql-update-join/</a>)
+reference: [tutorial on UPDATE join syntax for
+MySQL](http://www.mysqltutorial.org/mysql-update-join/)
 
 Note that no `WHERE` clause is specified for the query. This by design,
-the reasoning for which will be expalined later in the document.
+the reasoning for which will be explained later in the document.
 
-In the default implementation of `dbUpdateTable()` the table `T1` must
-be a preexisting table ing the DBMS. Table `T2` will be created as a
-temporary table in the DBMS using a dataset supplied as a function
-argument. This dataset will usually be a tibble, a data.frame, or
-another object coerable to a data.frame.
+For `dbUpdateTable()` the table `T1` must be a pre-existing table in the
+DBMS. Table `T2` will be created as a temporary table in the DBMS using
+a dataset supplied as a function argument. This dataset will usually be
+a tibble, a data.frame, or another object coercible to a data.frame.
 
 the `dbUpdateTable` function call has two additional arguements `set`
 and `by` used for constructing the `SET` and `ON` clauses of the UPDATE
@@ -61,8 +60,15 @@ T2 <- tibble::as_tibble(list(C1=1:26,C2=LETTERS,CX=0,CY=1))
 sqlUpdateTable(con, "T1", T2, set = c("CX","CY"), by = c("C1","C2"))
 ```
 
-Why no `WHERE` caluse?
-----------------------
+### Table Indexing
+
+It is best practice to that the target DBMS table be indexed, with the
+indexed columns matching the columns specified by the `by` argument.
+When the temporary table used store the update dataset will be indexed
+by the columns in the `by` argument. The UPDATE-join operation with
+indexed table is generally quite fast.
+
+### Why no `WHERE` caluse?
 
 Update queries can use a `WHERE` clause to limit the scope of the
 update. However in an Update-join the scope of the query is alreadly

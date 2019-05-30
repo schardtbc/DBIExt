@@ -11,20 +11,22 @@ devtools::install_github("schardtbc/DBIExt")
 Introduction
 ------------
 
+### S4 generic dbUpdateTable()
+
 This DBI Extention package introduces a new S4 generic `dbUpdateTable`.
 Updating tables is not the focus of the DBI package as pure analysis
-scripts treat database tables as read-only.
+scripts treat a database tables as read-only.
 
 In other domains, database maintainence requires updating information in
 rows of an existing table. Dropping the table and recreating it as is
-done by dbWriteTable with overwrite argument set to true is not an
-optimal solution for many applications.
+done by dbWriteTable with the `overwrite` argument set to `TRUE` is not
+an optimal solution for many applications.
 
-No single generic update function could cover the diverse variety
-possible UPDATE queries. The `dbUpdateTable` S4 generic is introduced to
-perform a specific type DBMS UPDATE operation using the update join
-syntax. An example of this syntax is shown in the sql fragment shown
-below
+No single generic update function could cover the diverse variety of
+possible UPDATE queries. The `dbUpdateTable` S4 generic introduced in
+this package performs a specific type of DBMS UPDATE operation using the
+update join syntax. An example of this syntax is shown in the sql
+fragment shown below. This syntax is used by MariaDB and MySQL.
 
 ``` sql
 UPDATE T1
@@ -36,7 +38,7 @@ SET T1.CX = T2.CX,
 reference: [tutorial on UPDATE join syntax for
 MySQL](http://www.mysqltutorial.org/mysql-update-join/)
 
-Note that no `WHERE` clause is specified for the query. This by design,
+Note that no `WHERE` clause is specified for the query. This by design;
 the reasoning for which will be explained later in the document.
 
 For `dbUpdateTable()` the table `T1` must be a pre-existing table in the
@@ -52,29 +54,35 @@ query.
 dbUpdateTable(con, "T1", T2, set = c("CX","CY"), by = c("C1","C2"))
 ```
 
+### SQL Helper Functions
+
 There is a helper function sqlUpdateTable which generates the UPDATE sql
-but dowes not execute it.
+but does not execute it. Helper functions are also provided to generate
+the sql for the `ON` clause of the join as well as the multiples SET
+clauses of the `UPDATE`. These are `sqlOnClause()` and `sqlSetClause()`.
 
 ``` r
 T2 <- tibble::as_tibble(list(C1=1:26,C2=LETTERS,CX=0,CY=1))
 sqlUpdateTable(con, "T1", T2, set = c("CX","CY"), by = c("C1","C2"))
+sqlOnClause(con,"T1","T2",by = c("C1","C2"));
+sqlSetClause(con,"T1","T2",set = c("CX","CY"));
 ```
 
 ### Table Indexing
 
-It is best practice to that the target DBMS table be indexed, with the
-indexed columns matching the columns specified by the `by` argument.
-When the temporary table used store the update dataset will be indexed
-by the columns in the `by` argument. The UPDATE-join operation with
-indexed table is generally quite fast.
+It is best practice that the target DBMS table be indexed, with the
+indexed columns matching the columns specified by the `by` argument. The
+temporary table used store the update dataset is indexed by the columns
+in the `by` argument as part of the `dbUpdateTable()` implementation.
+The `UPDATE-JOIN` operation with indexed table is generally quite fast.
 
 ### Why no `WHERE` caluse?
 
 Update queries can use a `WHERE` clause to limit the scope of the
-update. However in an Update-join the scope of the query is alreadly
+update. However in an `UPDATE-JOIN` the scope of the query is alreadly
 limited by the `ON` clause of the join. This combined with the power of
 `R` to precisely form the update dataset makes use of a `WHERE` clause
-redundent.
+redundent, IMHO.
 
 A (very) Simple Example
 -----------------------

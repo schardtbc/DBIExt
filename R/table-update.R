@@ -63,7 +63,7 @@ function(con, target.table, data.update, set = NULL, by = NULL) {
     target.by <- names(by);
     update.by <- unname(by);
     if (is.null(target.by)) target.by<-update.by;
-    stopifnot(setequal(target.by,intersect(taget.by,colsInTarget)),setequal(update.by,intersect(update.by,colsInData)));
+    stopifnot(setequal(target.by,intersect(target.by,colsInTarget)),setequal(update.by,intersect(update.by,colsInData)));
   }
   if (is.null(set)){
     set <- setdiff(colsInData,update.by);

@@ -17,8 +17,12 @@ sqlAlterTableWithPrimaryKey(conn, target.table, pk, ...)
 `sqlAlterTableWithPrimaryKey()` composes a single SQL statement to add a composite primary key
 to a table in the database
 }
+\details{
+suggest that this be done prior to adding any data to the table
+}
 \seealso{
-Other SQL generation: \code{\link{sqlOnClause}},
+Other SQL generation: \code{\link{sqlAddIndex}},
+  \code{\link{sqlOnClause}},
   \code{\link{sqlReplaceInTable}},
   \code{\link{sqlSetClause}}, \code{\link{sqlUpdateTable}}
 }

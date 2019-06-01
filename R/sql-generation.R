@@ -182,6 +182,8 @@ setMethod("sqlUpdateTable", signature("DBIConnection"),
 #' `sqlAlterTableWithPrimaryKey()` composes a single SQL statement to add a composite primary key
 #' to a table in the database
 #'
+#' suggest that this be done prior to adding any data to the table
+#'
 #' @param conn a DBIConnector Object
 #' @param target.table table in database to which primary key will be added
 #' @param pk a character vector of column names which make up the composite primary key for the table
@@ -210,6 +212,48 @@ setMethod("sqlAlterTableWithPrimaryKey", signature("DBIConnection"),
               "\n",
               "ADD PRIMARY KEY (",
               paste0(pk.q, collapse = ", "),
+              ");"
+            ))
+          })
+
+
+
+#' generate sql for an alter table statment adding an index to an existing DBMS table
+#'
+#' suggest that this be done prior to adding any data to the table.
+#'
+#' `sqlAddIndex()` composes a single SQL statement to add a composite primary key
+#' to a table in the database
+#'
+#' @param conn a DBIConnector Object
+#' @param table table in database to which primary key will be added
+#' @param index a character vector of column names which make up the index for the table
+#' @param unqiue boolean specifying if index is unique (a rows must have a unique value)
+#'
+#' @family SQL generation
+#' @export
+setGeneric("sqlAddIndex",
+           def = function(conn, table, index, unique = FALSE, ...) standardGeneric("sqlAddIndex")
+          )
+
+#' generate sql for an alter table statment adding a primary key to a table
+#' @rdname hidden_aliases
+#' @export
+setMethod("sqlAddIndex", signature("DBIConnection"),
+          function(conn, table, index, unique = FALSE) {
+            table.q <- DBI::dbQuoteIdentifier(conn, table)
+
+            index.q <-
+              sapply(index, function(x) {
+                DBI::dbQuoteIdentifier(conn, as.character(x))
+              })
+            idx.name <- paste0(c("idx_",letters[sample(1:26,10)]),collapse="");
+            sql_alter_table <- DBI::SQL(paste0(
+              "ALTER TABLE ",
+              table.q,
+              "\n",
+              "ADD ", if (unique) "UNIQUE ", "INDEX ",idx.name,  " (",
+              paste0(index.q, collapse = ", "),
               ");"
             ))
           })

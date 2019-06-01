@@ -23,6 +23,7 @@ Collate:
     'DBIExt.R'
     'hidden.R'
     'sql-generation.R'
+    'table-indexing.R'
     'table-replace.R'
     'table-update.R'
 VignetteBuilder: knitr

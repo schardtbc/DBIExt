@@ -61,7 +61,8 @@ sqlAppendTableTemplate(ANSI(), "mtcars", mtcars)
 sqlAppendTableTemplate(ANSI(), "mtcars", mtcars, row.names = FALSE)
 }
 \seealso{
-Other SQL generation: \code{\link{sqlAlterTableWithPrimaryKey}},
+Other SQL generation: \code{\link{sqlAddIndex}},
+  \code{\link{sqlAlterTableWithPrimaryKey}},
   \code{\link{sqlOnClause}}, \code{\link{sqlSetClause}},
   \code{\link{sqlUpdateTable}}
 }

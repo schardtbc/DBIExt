@@ -24,6 +24,7 @@ to a table in the database
 }
 \seealso{
 Other SQL generation: \code{\link{sqlAlterTableWithPrimaryKey}},
+  \code{\link{sqlDeleteAllRecords}},
   \code{\link{sqlOnClause}},
   \code{\link{sqlReplaceInTable}},
   \code{\link{sqlSetClause}}, \code{\link{sqlUpdateTable}}

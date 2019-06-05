@@ -44,6 +44,7 @@ dbDisconnect(con)
 \seealso{
 Other DBIConnection generics: \code{\link{dbAddIndex}},
   \code{\link{dbAddPrimaryKey}},
-  \code{\link{dbUpdateTable}}
+  \code{\link{dbDeleteAllRecords}},
+  \code{\link{dbDropTable}}, \code{\link{dbUpdateTable}}
 }
 \concept{DBIConnection generics}

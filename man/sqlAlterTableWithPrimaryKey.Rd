@@ -22,6 +22,7 @@ suggest that this be done prior to adding any data to the table
 }
 \seealso{
 Other SQL generation: \code{\link{sqlAddIndex}},
+  \code{\link{sqlDeleteAllRecords}},
   \code{\link{sqlOnClause}},
   \code{\link{sqlReplaceInTable}},
   \code{\link{sqlSetClause}}, \code{\link{sqlUpdateTable}}

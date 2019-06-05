@@ -52,7 +52,9 @@ clc  <- letters[cid];
 
 
 target.df <- tibble::as_tibble(list(id = cid, cn = cn, cc = clc));
-DBI::dbWriteTable(db,"T123",target.df,overwrite = TRUE);
+DBI::dbCreateTable(db,"T123",target.df);
+dbAddPrimaryKey(db,"T123",primary_key = c("id"))
+DBI::dbAppendTable(db,"T123",target.df)
 
 original <- dbReadTable(db, "T123")
 original

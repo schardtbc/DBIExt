@@ -257,3 +257,35 @@ setMethod("sqlAddIndex", signature("DBIConnection"),
               ");"
             ))
           })
+
+
+#' generate sql deleting all records in a table
+#'
+#'
+#' `sqlDeleteAllRecords()` composes a single SQL statement to delete all records in an existing table
+#'
+#' @param conn a DBIConnector Object
+#' @param name table in database to which primary key will be added
+#'
+#' @family SQL generation
+#' @export
+setGeneric("sqlDeleteAllRecords",
+           def = function(conn, name, ...) standardGeneric("sqlDeleteAllRecords")
+)
+
+#' generate sql for an DELETE statment todelete all records from an existing table
+#' @rdname hidden_aliases
+#' @export
+setMethod("sqlDeleteAllRecords", signature("DBIConnection"),
+          function(conn, name) {
+            table.q <- DBI::dbQuoteIdentifier(conn, name)
+
+            DBI::SQL(paste0(
+              "DELETE FROM ",
+              table.q,
+              ";\n"
+            ))
+          })
+
+
+

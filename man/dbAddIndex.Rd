@@ -4,12 +4,12 @@
 \alias{dbAddIndex}
 \title{Adds a Primary Key to an existing table}
 \usage{
-dbAddIndex(con, table, index, unique = FALSE, ...)
+dbAddIndex(con, name, index, unique = FALSE, ...)
 }
 \arguments{
 \item{con}{a DBConnection oject}
 
-\item{table}{a character string specifying the name of an existing DBMS table}
+\item{name}{a character string specifying the name of an existing DBMS table}
 
 \item{index}{a character vector of column names which will form the index}
 
@@ -37,6 +37,8 @@ Default sql generation is appropriate for MariaDB and MySQL.
 }
 \seealso{
 Other DBIConnection generics: \code{\link{dbAddPrimaryKey}},
+  \code{\link{dbDeleteAllRecords}},
+  \code{\link{dbDropTable}},
   \code{\link{dbReplaceInTable}},
   \code{\link{dbUpdateTable}}
 }

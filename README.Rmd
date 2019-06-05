@@ -31,3 +31,8 @@ devtools::install_github("schardtbc/DBIExt")
 
 ```{r child='vignettes/simple-example.Rmd'}
 ```
+
+## Setting Indexes on Existing Tables
+
+```{r child='vignettes/set-index.Rmd'}
+```

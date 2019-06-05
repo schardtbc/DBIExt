@@ -53,6 +53,9 @@ An UPDATE statement is then constructed by the dbUpdateTable() method. The gener
 
 }
 \seealso{
-Other DBIConnection generics: \code{\link{dbReplaceInTable}}
+Other DBIConnection generics: \code{\link{dbAddIndex}},
+  \code{\link{dbAddPrimaryKey}},
+  \code{\link{dbDeleteAllRecords}},
+  \code{\link{dbDropTable}}, \code{\link{dbReplaceInTable}}
 }
 \concept{DBIConnection generics}

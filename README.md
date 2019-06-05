@@ -225,3 +225,39 @@ updated
 #> 25 25 124  Y
 #> 26 26 125  Z
 ```
+
+Setting Indexes on Existing Tables
+----------------------------------
+
+``` r
+
+dbCreateTable(conn = db,
+              name = "daily_time_series",
+              fields <- list(
+                symbol = "VARCHAR(8)",
+                date   = "DATE",
+                sourceName = "VARCHAR(4)",
+                sequenceID = "INTEGER",
+                datetime = "DATETIME",
+                epoch = "DOUBLE",
+                open = "FLOAT",
+                high = "FLOAT",
+                low = "FLOAT",
+                close = "FLOAT",
+                volume = "DOUBLE",
+                aOpen = "FLOAT",
+                aHigh = "FLOAT",
+                aLow = "FLOAT",
+                aClose = "FLOAT",
+                aVolume = "DOUBLE",
+                dividendAmount = "FLOAT",
+                splitCoefficient = "FLOAT"
+              );
+
+# add the composit primary key                            
+dbAddPrimaryKey(conn = db, name = "daily_time_series", primary_key = c("symbol","date","sourceName")) 
+
+# add seconary imdexes on date and sequenceID
+dbAddIndex(conn = db, name = "daily_time_series", index = "sequenceID")
+dbAddIndex(conn = db, name = "daily_time_series", index = "date")
+```

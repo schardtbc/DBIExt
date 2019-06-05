@@ -21,8 +21,11 @@ LazyData: true
 RoxygenNote: 6.1.1
 Collate: 
     'DBIExt.R'
+    'delete-records.R'
+    'drop-table.R'
     'hidden.R'
     'sql-generation.R'
+    'table-indexing.R'
     'table-replace.R'
     'table-update.R'
 VignetteBuilder: knitr

@@ -25,7 +25,9 @@ These methods are mostly useful for backend implementers.
 
 }
 \seealso{
-Other SQL generation: \code{\link{sqlAlterTableWithPrimaryKey}},
+Other SQL generation: \code{\link{sqlAddIndex}},
+  \code{\link{sqlAlterTableWithPrimaryKey}},
+  \code{\link{sqlDeleteAllRecords}},
   \code{\link{sqlReplaceInTable}},
   \code{\link{sqlSetClause}}, \code{\link{sqlUpdateTable}}
 }

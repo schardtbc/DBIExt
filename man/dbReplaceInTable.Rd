@@ -42,6 +42,9 @@ dbReadTable(con, "iris")
 dbDisconnect(con)
 }
 \seealso{
-Other DBIConnection generics: \code{\link{dbUpdateTable}}
+Other DBIConnection generics: \code{\link{dbAddIndex}},
+  \code{\link{dbAddPrimaryKey}},
+  \code{\link{dbDeleteAllRecords}},
+  \code{\link{dbDropTable}}, \code{\link{dbUpdateTable}}
 }
 \concept{DBIConnection generics}
